@@ -3,7 +3,8 @@
   padding: 0;
   box-sizing: border-box;
 }
-:root{
+
+:root {
   --dark: #111111;
   --sun: #ffd700;
   --sun-shadow: #987416;
@@ -19,47 +20,47 @@
   --background-day: linear-gradient(skyblue, cadetblue);
   --background-night: linear-gradient(-45deg, #222, #000030);
 }
-main{
+
+main {
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
 
-  -webkit-transition: .4s;
   transition: .4s;
 }
-.dark{
+
+.dark {
   background: var(--dark);
 }
-.container{
+
+.container {
   position: relative;
   display: inline-block;
   width: 80px;
   height: 34px;
-
-  -webkit-transform: scale(3);
   transform: scale(3);
 }
-.container input{
+
+.container input {
   opacity: 0;
   width: 0;
   height: 0;
 }
-.slider{
+
+.slider {
   position: absolute;
   cursor: pointer;
   inset: 0;
   background: var(--background-day);
   box-shadow: inset 0 0 3px;
-  -webkit-transition: 0.4s;
   transition: 0.4s;
-
   filter: drop-shadow(0 0 2px var(--dark));
-
   overflow: hidden;
   z-index: 1;
 }
-.slider::before{
+
+.slider::before {
   position: absolute;
   content: "";
   height: 26px;
@@ -67,34 +68,22 @@ main{
   left: 4px;
   bottom: 4px;
   background-color: var(--sun);
-  -webkit-transition: 0.4s;
   transition: 0.4s;
-  box-shadow:
-    inset 0 -1px 2px var(--sun-shadow),
-    0 1px 2px var(--shadow-01),
-    0 0 0 10px var(--shadow-02),
-    0 0 0 20px var(--shadow-02),
-    10px 0 0 20px var(--shadow-02);
+  box-shadow: inset 0 -1px 2px var(--sun-shadow), 0 1px 2px var(--shadow-01), 0 0 0 10px var(--shadow-02), 0 0 0 20px var(--shadow-02), 10px 0 0 20px var(--shadow-02);
 }
-input:checked + .slider{
+
+input:checked + .slider {
   background: var(--background-night);
   filter: drop-shadow(0 0 2px var(--white));
 }
 
-input:checked + .slider:before{
+input:checked + .slider:before {
   background: var(--moon);
-  -webkit-transform: translateX(180%);
-  -ms-transform: translateX(180%);
   transform: translateX(180%);
-  box-shadow:
-    inset 0 -1px 2px var(--moon-shadow),
-    0 1px 2px var(--shadow-03),
-    0 0 0 10px var(--shadow-02),
-    0 0 0 20px var(--shadow-02),
-    -10px 0 0 20px var(--shadow-02);
+  box-shadow: inset 0 -1px 2px var(--moon-shadow), 0 1px 2px var(--shadow-03), 0 0 0 10px var(--shadow-02), 0 0 0 20px var(--shadow-02), -10px 0 0 20px var(--shadow-02);
 }
 
-.slider::after{
+.slider::after {
   content: "";
   position: absolute;
   background: var(--crater);
@@ -103,35 +92,23 @@ input:checked + .slider:before{
   border-radius: 50%;
   bottom: 65%;
   right: 16%;
-  box-shadow:
-    -8px 7px 0 3px var(--crater),
-    2px 10px 0 var(--crater)
-  ;
-  -webkit-transition: .4s;
+  box-shadow: -8px 7px 0 3px var(--crater), 2px 10px 0 var(--crater);
   transition: .4s;
-  -webkit-transform: scale(0) rotate(360deg);
   transform: scale(0) rotate(360deg);
   filter: saturate(.75);
 }
 
-input:checked + .slider::after{
-  -webkit-transform: scale(1) rotate(-24deg);
+input:checked + .slider::after {
   transform: scale(1) rotate(-24deg);
 }
-input:checked + .slider .background{
-  -webkit-transform: translateY(260%);
+
+input:checked + .slider .background {
   transform: translateY(260%);
   opacity: 0;
 }
 
-.star{
-  -webkit-transform: scale(0);
-  transform: scale(0);
-  -webkit-transition: .4s;
-  transition: .4s;
-}
-
-input:checked + .slider .star{
+// Estrelas
+.star {
   position: absolute;
   width: 0;
   height: 0;
@@ -140,44 +117,64 @@ input:checked + .slider .star{
   transform: rotate(35deg);
   border-top: none;
   margin: 5px 0;
-  -webkit-transform: scale(.3) translate(50%);
-  transform: scale(.3) translate(50%);
+  transition: .4s;
+  opacity: 0; // Inicialmente invisível
 }
-input:checked + .slider .star:last-child{
-  -webkit-transform: scale(.4) translate(225%, 300%);
-  transform: scale(.4) translate(225%, 300%);
+
+input:checked + .slider .star {
+  opacity: 1; // Aparece quando o botão é ativado
 }
-input:checked + .slider .star::before,
-input:checked + .slider .star::after{
-  content: "";
-  position: absolute;
-  width: 0;
-  height: 0;
-  border-top: none;
+
+input:checked + .slider .star:nth-child(1) {
+  left: 10%;
+  top: 20%;
+  transform: scale(1.2) rotate(35deg);
 }
-input:checked + .slider .star::before{
-  border: 3px solid transparent;
-  border-bottom: 8px solid var(--star);
-  -webkit-transform: rotate(35deg);
-  transform: rotate(35deg);
-  top: -7.5px;
-  left: 1.5px;
+
+input:checked + .slider .star:nth-child(2) {
+  left: 50%;
+  top: 10%;
+  transform: scale(1.5) rotate(25deg);
 }
-input:checked + .slider .star::after{
-  border: 10px solid transparent;
-  border-bottom: 7px solid var(--star);
-  -webkit-transform: rotate(70deg);
-  transform: rotate(70deg);
-  top: -7px;
-  left: -4.5px;
+
+input:checked + .slider .star:nth-child(3) {
+  left: 70%;
+  top: 40%;
+  transform: scale(1.3) rotate(30deg);
 }
+
+input:checked + .slider .star:nth-child(4) {
+  left: 30%;
+  top: 70%;
+  transform: scale(1.4) rotate(40deg);
+}
+
+input:checked + .slider .star:nth-child(5) {
+  left: 80%;
+  top: 80%;
+  transform: scale(1.6) rotate(20deg);
+}
+
+// Adicionando mais estrelas para a animação
+.slider .star {
+  opacity: 0; // Começa invisível
+}
+
+input:checked + .slider .star:nth-of-type(1) { left: 15%; top: 10%; opacity: 1; }
+input:checked + .slider .star:nth-of-type(2) { left: 25%; top: 20%; opacity: 1; }
+input:checked + .slider .star:nth-of-type(3) { left: 50%; top: 5%; opacity: 1; }
+input:checked + .slider .star:nth-of-type(4) { left: 75%; top: 25%; opacity: 1; }
+input:checked + .slider .star:nth-of-type(5) { left: 85%; top: 15%; opacity: 1; }
+
 .slider.round {
   border-radius: 34px;
 }
+
 .slider.round:before {
   border-radius: 50%;
 }
-.background{
+
+.background {
   position: absolute;
   width: 10px;
   height: 10px;
@@ -185,13 +182,6 @@ input:checked + .slider .star::after{
   border-radius: 50%;
   bottom: 0;
   right: 0;
-  box-shadow:
-    0 -10px 0 8px var(--cloud),
-    -10px 0px 0 8px var(--cloud),
-    -45px 4px 0 5px var(--cloud),
-    -60px 0px 0 3px var(--cloud),
-    -29px 2px 0 8px var(--cloud)
-  ;
-  -webkit-transition: .4s;
+  box-shadow: 0 -10px 0 8px var(--cloud), -10px 0px 0 8px var(--cloud), -45px 4px 0 5px var(--cloud), -60px 0px 0 3px var(--cloud), -29px 2px 0 8px var(--cloud);
   transition: .4s;
 }
